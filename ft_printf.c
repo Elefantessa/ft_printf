@@ -14,61 +14,52 @@
 
 static int  check_type (va_list ap, char c)
 {
-    int     val;
-    char    t;
-    char    *s;
-    int     i;
+	int val;
 
-    i = 0;
-    val = -1;
-    if (c == 'c')
-    {
-        t = va_arg(ap, int);
-        write (1, &t, 1) ;
-        val = 1;
-    }
-    else if (c == 's')
-    {
-        s = va_arg(ap, char *);
-        while (*s)
-       {
-            write (1, s, 1) ;
-            s++;
-            i++;
-       }
-       val = i;
-    }
-    return (val);
+	val = -1;
+	if (c == 'c')
+	{
+		val = ft_putchar_printf(va_arg(ap, int));
+	}
+	else if (c == 's')
+	{
+		val =ft_putstr_printf( va_arg(ap, char *));
+	}
+	else if (c == 'i' || c == 'd')
+	{
+		val =ft_putnbr_printf( va_arg(ap, int));
+	}
+	return (val);
 }
 
 int     ft_printf(const char *format, ...)
 {
-    va_list ap;
-    int     retval;
-    int     res;
+	va_list ap;
+	int     retval;
+	int     res;
 
-    retval = 0;
-    res = 0;
-    va_start(ap, format);
-    while (*format != '\0')
-    {
-        if (*format == '%')
-        {
-            format++;
-            res = check_type (ap, *format);
-            if (res < 0)
-                return (-1);
-            retval = retval + res;
-        }
-        else
-        {
-            write (1, format, 1);
-            retval ++;
-        }
-        format++;
-    }
-    va_end(ap);
-    return (retval);
+	retval = 0;
+	res = 0;
+	va_start(ap, format);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			res = check_type (ap, *format);
+			if (res < 0)
+				return (-1);
+			retval = retval + res;
+		}
+		else
+		{
+			write (1, format, 1);
+			retval ++;
+		}
+		format++;
+	}
+	va_end(ap);
+	return (retval);
 }
 
 #include <stdio.h>
@@ -76,7 +67,7 @@ int main ()
 {
   int x;
   int y;
-   x = ft_printf("ft_printf :%s\n","hala");
-   y =  printf ("Characters: %s\n", "hala");
-    return (0);
+   x = ft_printf("ft_printf int :|%d|\n",-2147483648);
+   y =  printf ("######## \nprintf int: |%d|\n", -2147483648);
+	return (0);
 }

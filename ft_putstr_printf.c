@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_putstr_printf.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halramli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 13:01:54 by halramli          #+#    #+#             */
-/*   Updated: 2023/01/30 13:01:58 by halramli         ###   ########.fr       */
+/*   Created: 2023/01/31 17:01:13 by halramli          #+#    #+#             */
+/*   Updated: 2023/01/31 17:01:17 by halramli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-#   define LIBFTPRINTF_H
-#   include "libft/libft.h"
-#	include <stdarg.h>
+#include "libftprintf.h"
 
-#   include <stdio.h>
+int	ft_putstr_printf(char *s)
+{
+	int len;
 
-
-int     ft_printf(const char *format, ...);
-int     ft_putchar_printf(char c);
-int    ft_putstr_printf(char *s);
-int     ft_putnbr_printf(int nb);
-
-#endif
+	len = 0;
+	if (!s)
+		return (0);
+	len = ft_strlen(s);
+	write (1, s,len);
+	return (len);
+}
