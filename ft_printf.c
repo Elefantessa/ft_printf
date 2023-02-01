@@ -70,8 +70,8 @@ int main ()
 {
   int x;
   int y;
-   x = ft_printf("printf|%i|\n",INT_MIN);
-   y =  printf ("printf|%i|\n",INT_MIN);
-   printf("x is |%d|   y is |%d|", x, y);
+   x = ft_printf("printf|%u|\n",UINT_MAX);
+   y =  printf ("printf|%u|\n",UINT_MAX);
+   printf("x is  |%d|  y is |%d|",x,y);
 	return (0);
 }
