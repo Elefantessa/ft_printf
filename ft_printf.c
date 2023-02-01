@@ -19,15 +19,19 @@ static int  check_type (va_list ap, char c)
 	val = -1;
 	if (c == 'c')
 	{
-		val = ft_putchar_printf(va_arg(ap, int));
+		val = ft_putchar_printf(ap);
 	}
 	else if (c == 's')
 	{
-		val =ft_putstr_printf( va_arg(ap, char *));
+		val = ft_putstr_printf(ap);
 	}
 	else if (c == 'i' || c == 'd')
 	{
-		val =ft_putnbr_printf( va_arg(ap, int));
+		val = ft_putnbr_printf(ap);
+	}
+	else if (c == 'u')
+	{
+		val = ft_put_u_nbr_printf(ap);
 	}
 	return (val);
 }
@@ -62,12 +66,12 @@ int     ft_printf(const char *format, ...)
 	return (retval);
 }
 
-#include <stdio.h>
 int main ()
 {
   int x;
   int y;
-   x = ft_printf("ft_printf int :|%d|\n",-2147483648);
-   y =  printf ("######## \nprintf int: |%d|\n", -2147483648);
+   x = ft_printf("printf|%i|\n",INT_MIN);
+   y =  printf ("printf|%i|\n",INT_MIN);
+   printf("x is |%d|   y is |%d|", x, y);
 	return (0);
 }

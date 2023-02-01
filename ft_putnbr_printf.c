@@ -12,30 +12,36 @@
 
 #include "libftprintf.h"
 
-int	ft_putnbr_printf(int nb)
+int	ft_putnbr_printf(va_list ap)
 {
+	int	nb;
     int val;
 
+	nb = va_arg(ap, int);
     val = 0;
 	if (nb == -2147483648)
 	{
-		val = ft_putstr_printf("-2147483648");
-        return (val);
+		ft_putstr_fd( "-2147483648", 1);
+        return (11);
+	}
+	if (nb < 10 && nb >= 0)
+	{
+		ft_putchar_fd(nb + 48, 1);
+		return (1);
 	}
 	if (nb < 0)
 	{
-		val = val + ft_putchar_printf('-');
+		ft_putchar_fd('-', 1);
+		val = 1;
 		nb *= -1;
 	}
-	if (nb >= 10)
+	ft_putnbr_fd(nb, 1);
+	while (nb / 10)
 	{
-		val = val + ft_putnbr_printf(nb / 10);
-     
-		val = val + ft_putnbr_printf(nb % 10);
+		++val;
+		nb = nb / 10;
 	}
-	else
-	{
-		val = val + ft_putchar_printf(nb + 48);
-	}
+	val ++;
+	
     return (val);
 }

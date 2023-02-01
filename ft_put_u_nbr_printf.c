@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_put_u_nbr_printf.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halramli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 13:01:54 by halramli          #+#    #+#             */
-/*   Updated: 2023/01/30 13:01:58 by halramli         ###   ########.fr       */
+/*   Created: 2023/02/01 15:30:06 by halramli          #+#    #+#             */
+/*   Updated: 2023/02/01 15:31:08 by halramli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-#   define LIBFTPRINTF_H
-#   include "libft/libft.h"
-#	include <stdarg.h>
-// should be removed.
-#   include <stdio.h>
-#   include <limits.h>
+#include "libftprintf.h"
 
+int	ft_put_u_nbr_printf(va_list ap)
+{
+	unsigned int	nb;
+	int				val;
+	int				count;
 
-
-int	ft_printf(const char *format, ...);
-int	ft_putchar_printf(va_list ap);
-int	ft_putstr_printf(va_list);
-int	ft_putnbr_printf(va_list ap);
-int	ft_put_u_nbr_printf(va_list ap);
-
-#endif
+	nb = va_arg(ap,unsigned int);
+	val = 0;
+	count = 10;
+	while (nb % (10 * count) == nb)
+	{
+		count --;
+	}
+	
+	return (val);
+}

@@ -12,10 +12,11 @@
 
 #include "libftprintf.h"
 
-int	ft_putstr_printf(char *s)
+int	ft_putstr_printf(va_list ap)
 {
 	int len;
-
+	char	*s;
+	s = va_arg(ap,char*);
 	len = 0;
 	if (!s)
 		return (0);
