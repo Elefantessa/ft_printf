@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_u_nbr_printf.c                              :+:      :+:    :+:   */
+/*   ft_putnbr_x_printf.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halramli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 15:30:06 by halramli          #+#    #+#             */
-/*   Updated: 2023/02/01 15:31:08 by halramli         ###   ########.fr       */
+/*   Created: 2023/02/02 12:51:01 by halramli          #+#    #+#             */
+/*   Updated: 2023/02/02 12:51:08 by halramli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int    ft_put_u_nbr_printf(va_list ap)
+static void print_hex(unsigned int nb , char ch)
 {
-	unsigned int    nb;
-	int                val;
-	int                count;
-	int                mod;
+	char *vx;
 
-	nb = va_arg(ap,unsigned int);
-	val = 0;
-	count = 1000000000;
-	while (nb % count == nb)
+	if ( ch == 'X')
+		vx = "0123456789ABCDEF";
+	else
+		vx = "0123456789abcdef";
+	 
+	 if (!(nb / 16))
+	 {
+		write (1, &vx[nb],1);
+	 }
+	 else
+	 {
+		print_hex(nb / 16 , ch);
+		print_hex(nb % 16 , ch);
+	 }
+}
+
+int	ft_putnbr_x_printf(va_list ap, char c)
+{
+	int	val;
+	unsigned int	nb;
+
+	val = 0;	
+	nb = va_arg(ap, unsigned int);
+	print_hex( nb , c );
+	while (nb /16)
 	{
-		count = count / 10; 
-	}
-	mod = nb % count;
-	while (mod && count)
-	{
-		ft_putchar_fd('0' + (nb / count), 1);
 		val++;
-		count = count / 10;
-		nb = mod;
-		mod = mod %  count;
+		nb  = nb / 16;
 	}
-	ft_putchar_fd('0' + nb, 1);
-	
 	return (++val);
 }

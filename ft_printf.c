@@ -33,6 +33,15 @@ static int  check_type (va_list ap, char c)
 	{
 		val = ft_put_u_nbr_printf(ap);
 	}
+	else if (c == 'x' || c == 'X')
+	{
+		val = ft_putnbr_x_printf(ap, c);
+	}
+	else if (c == '%')
+	{
+		write(1,"%",1);
+		val = 1;
+	}
 	return (val);
 }
 
@@ -70,8 +79,8 @@ int main ()
 {
   int x;
   int y;
-   x = ft_printf("printf|%u|\n",UINT_MAX);
-   y =  printf ("printf|%u|\n",UINT_MAX);
+   x = ft_printf("|%d|\n",INT_MAX);
+   y =  printf ("|%0d|\n",INT_MIN);
    printf("x is  |%d|  y is |%d|",x,y);
 	return (0);
 }
