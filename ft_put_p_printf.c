@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_u_nbr_printf.c                              :+:      :+:    :+:   */
+/*   ft_put_p_printf.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halramli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 15:30:06 by halramli          #+#    #+#             */
-/*   Updated: 2023/02/01 15:31:08 by halramli         ###   ########.fr       */
+/*   Created: 2023/02/02 16:32:29 by halramli          #+#    #+#             */
+/*   Updated: 2023/02/02 16:33:33 by halramli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_put_u_nbr_printf(va_list ap)
+static void	print_hex(unsigned long nb)
 {
-	unsigned int	nb;
-	int				val;
-	int				count;
-	int				mod;
+	char	*vx;
 
-	nb = va_arg(ap, unsigned int);
-	val = 0;
-	count = 1000000000;
-	while (nb % count == nb)
+	vx = "0123456789abcdef";
+	if (!(nb / 16))
 	{
-		count = count / 10;
+		write(1, &vx[nb], 1);
 	}
-	mod = nb % count;
-	while (mod && count)
+	else
 	{
-		ft_putchar_fd('0' + (nb / count), 1);
+		print_hex(nb / 16);
+		print_hex(nb % 16);
+	}
+}
+
+int	ft_put_p_printf(va_list ap)
+{
+	unsigned long	p;
+	int				val;
+
+	p = (unsigned long) va_arg(ap, void *);
+	write(1, "0x", 2);
+	val = 2;
+	print_hex (p);
+	while (p / 16)
+	{
 		val++;
-		count = count / 10;
-		nb = mod;
-		mod = mod % count;
+		p = p / 16;
 	}
-	ft_putchar_fd('0' + nb, 1);
 	return (++val);
 }

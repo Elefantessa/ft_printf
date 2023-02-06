@@ -10,17 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putstr_printf(va_list ap)
 {
-	int len;
+	int		len;
 	char	*s;
-	s = va_arg(ap,char*);
+
+	s = va_arg(ap, char *);
 	len = 0;
 	if (!s)
-		return (0);
+		s = "(null)";
 	len = ft_strlen(s);
-	write (1, s,len);
+	write(1, s, len);
 	return (len);
 }

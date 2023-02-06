@@ -10,19 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+
+static int	count_digit(int nb, int val)
+{
+	while (nb / 10)
+	{
+		++val;
+		nb = nb / 10;
+	}
+	val ++;
+	return (val);
+}
 
 int	ft_putnbr_printf(va_list ap)
 {
 	int	nb;
-    int val;
+	int	val;
 
 	nb = va_arg(ap, int);
-    val = 0;
+	val = 0;
 	if (nb == -2147483648)
 	{
-		ft_putstr_fd( "-2147483648", 1);
-        return (11);
+		ft_putstr_fd("-2147483648", 1);
+		return (11);
 	}
 	if (nb < 10 && nb >= 0)
 	{
@@ -36,12 +47,5 @@ int	ft_putnbr_printf(va_list ap)
 		nb *= -1;
 	}
 	ft_putnbr_fd(nb, 1);
-	while (nb / 10)
-	{
-		++val;
-		nb = nb / 10;
-	}
-	val ++;
-	
-    return (val);
+	return (count_digit(nb, val));
 }
