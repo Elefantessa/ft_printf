@@ -7,8 +7,8 @@ int main ()
   void *p;
   p = &y;
 
-   x = ft_printf(" NULL |%s| NULL \n", NULL);
-   y =  printf(" NULL |%s| NULL \n", NULL);
+   x = ft_printf(" |%u| \n", 100);
+   y =  printf(" |%u| \n", 100);
    printf("x is  |%d|  y is |%d|",x,y);
 	return (0);
 } 
